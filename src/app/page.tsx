@@ -17,31 +17,31 @@ export default function Home() {
         return <Test1/>
       case 'test2':
         return <Test2/>
+
     }
 
   }
   return (
-      <main className="h-screen w-screen overflow-hidden flex-col flex" style={{
+      <main className="h-screen w-screen overflow-hidden flex-col flex " style={{
         backgroundImage: 'url("/bliss.jpg")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
       }}>
-        <div className="flex-3 p-8">
+        <div className="flex-1 relative">
           {/* test shortcut */}
-          <Shortcut id="test1" title="hell"/>
-          <Shortcut id="test2" title="hell"/>
-          <Shortcut id="test3" title="hell"/>
+          <Shortcut id="test1" title="test shortcut"/>
+          <Shortcut id="test2" title="hello"/>
+          <Shortcut id="test3" title="yes"/>
 
 
-          {openApps.map((id) => (
-          <Window key={id} id={id} title={id.toUpperCase()}>
+          {openApps.map((id, index) => (
+          <Window index={index} key={id} id={id} title={id.toUpperCase()}>
             {RenderWindowContent(id)}
           </Window>
         ))}
 
         </div>
-        <span className="text-white text-4xl flex-1 mr-8">{openApps}</span>
       </main>
   );
 }

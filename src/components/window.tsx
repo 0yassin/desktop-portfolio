@@ -7,29 +7,34 @@ interface WindowProps {
   id: AppId;
   title: string;
   children: React.ReactNode;
+  index: number;
 }
 
-export default function Window({ id, title, children }: WindowProps) {
+export default function Window({ id, title, children, index }: WindowProps) {
   const { closeApp, setActiveApp, activeApp } = useOSStore();
   const nodeRef = useRef(null);
   const isActive = activeApp === id;
 
+    
+
   return (
-    <Draggable 
+    <Draggable
       nodeRef={nodeRef} 
-      handle=".window-header" 
+      handle=".window-header"
+      bounds="parent"
+      defaultPosition={{ x: 100 + (index * 25), y: window.innerHeight/-2.5 + (index * 25) }} 
       onStart={() => setActiveApp(id)}
     >
       <div 
         ref={nodeRef}
         onMouseDownCapture={() => setActiveApp(id)}
-        className={`absolute w-80 bg-[#ece9d8] border-2 shadow-xl flex flex-col ${
+        className={`absolute w-80 overflow-hidden bg-[#ece9d8] border-2 shadow-xl flex flex-col ${
           isActive ? 'z-50 border-[#0831d9]' : 'z-10 border-[#808080]'
         }`}
         style={{ minHeight: '100px' }}
       >
         <div 
-          className={`window-header h-7 flex justify-between items-center p-1 cursor-default select-none ${
+          className={`window-header h-7 flex justify-between items-center p-1 cursor-default select-none overflow-hidden ${
             isActive 
               ? 'bg-linear-to-r from-[#0058e6] to-[#0831d9]' 
               : 'bg-linear-to-r from-[#7a96df] to-[#6476c0]'

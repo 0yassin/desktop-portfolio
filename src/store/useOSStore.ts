@@ -14,10 +14,17 @@ export const useOSStore = create<OSState>((set) => ({
     openApps: [],
     activeApp: null,
 
-    launchApp: (id) => set((state) => ({
-        openApps: state.openApps.includes(id) ? state.openApps : [...state.openApps, id],
-        activeApp: id
-    })),
+    launchApp: (id) => set((state) => {
+        if (state.openApps.includes(id)) return { activeApp: id };
+        const offset = state.openApps.length * 20;
+        return{
+
+            openApps: state.openApps.includes(id) ? state.openApps : [...state.openApps, id],
+            activeApp: id
+        }
+        
+        
+    }),
 
     closeApp: (id) => set((state) => ({
         openApps: state.openApps.filter((app) => app !== id),
