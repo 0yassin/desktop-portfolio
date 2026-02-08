@@ -1,6 +1,16 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import localFont from 'next/font/local'
+
+
+// const tahoma = localFont({
+
+//   src: ("./fonts/windows-xp-tahoma.otf.woff2"),
+//   variable: "--font-tahoma"
+
+
+// })
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

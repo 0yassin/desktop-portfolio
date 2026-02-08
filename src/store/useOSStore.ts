@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-export type AppId = 'test1' | 'test2' | 'test3';
+export type AppId = 'About' | 'Projects' | 'Links';
 
 interface OSState {
     openApps: AppId[];       

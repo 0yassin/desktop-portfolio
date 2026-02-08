@@ -1,6 +1,7 @@
 'use client';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import Draggable from 'react-draggable';
+import { ResizableBox } from 'react-resizable';
 import { useOSStore, AppId } from '@/store/useOSStore';
 
 interface WindowProps {
@@ -15,53 +16,70 @@ export default function Window({ id, title, children, index }: WindowProps) {
   const nodeRef = useRef(null);
   const isActive = activeApp === id;
 
-    
+  const [size, setSize] = useState({ width: 320, height: 240 });
 
   return (
     <Draggable
-      nodeRef={nodeRef} 
+      nodeRef={nodeRef}
       handle=".window-header"
       bounds="parent"
-      defaultPosition={{ x: 100 + (index * 25), y: window.innerHeight/-2.5 + (index * 25) }} 
+      defaultPosition={{ x: 100 + (index * 25), y: window.innerHeight/-2.5 + (index * 25) }}
       onStart={() => setActiveApp(id)}
     >
-      <div 
+      <div
         ref={nodeRef}
         onMouseDownCapture={() => setActiveApp(id)}
-        className={`absolute w-80 overflow-hidden bg-[#ece9d8] border-2 shadow-xl flex flex-col ${
-          isActive ? 'z-50 border-[#0831d9]' : 'z-10 border-[#808080]'
+        className={`absolute overflow-hidden select-none bg-[#ece9d8] border-2 shadow-xl flex flex-col ${
+          isActive ? 'z-50 border-[#0831d9]' : 'z-10 border-[#666464]'
         }`}
-        style={{ minHeight: '100px' }}
       >
-        <div 
-          className={`window-header h-7 flex justify-between items-center p-1 cursor-default select-none overflow-hidden ${
-            isActive 
-              ? 'bg-linear-to-r from-[#0058e6] to-[#0831d9]' 
-              : 'bg-linear-to-r from-[#7a96df] to-[#6476c0]'
-          }`}
+        <ResizableBox
+          width={size.width}
+          height={size.height}
+          minConstraints={[200, 150]}
+          onResize={(e, data) => {
+            setSize({ width: data.size.width, height: data.size.height });
+          }}
+          handle={
+            <div className="absolute bottom-0 right-0 w-4 h-4 cursor-se-resize z-50">
+               <svg width="12" height="12" viewBox="0 0 12 12" className="absolute bottom-0 right-0">
+                <path d="M10 0V10H0" stroke="#808080" fill="none" />
+                <path d="M12 2V12H2" stroke="#808080" fill="none" />
+              </svg>
+            </div>
+          }
         >
-          <span className="text-white font-bold text-xs ml-1 truncate">
-            {title}
-          </span>
-          <button 
-            onMouseDown={(e) => e.stopPropagation()} 
-            onClick={(e) => {
-              e.stopPropagation();
-              closeApp(id);
-            }} 
-            className="bg-[#e21010] border border-white px-2 h-5 text-white text-xs font-bold hover:brightness-110 active:shadow-inner"
-          >
-            X
-          </button>
-        </div>
+          <div className="flex flex-col h-full w-full">
+            <div
+              className={`window-header h-7 flex justify-between items-center p-1 cursor-default select-none overflow-hidden shrink-0 ${
+                isActive
+                  ? 'bg-linear-to-r from-[#0058e6] to-[#0831d9]'
+                  : 'bg-linear-to-r from-[#7a96df] to-[#6476c0]'
+              }`}
+            >
+              <span className="text-white font-bold text-xs ml-1 truncate">
+                {title}
+              </span>
+              <button
+                onMouseDown={(e) => e.stopPropagation()}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  closeApp(id);
+                }}
+                className="bg-[#e21010] border border-white px-2 h-5 text-white text-xs font-bold hover:brightness-110 active:shadow-inner"
+              >
+                X
+              </button>
+            </div>
 
-        {/* Content Body */}
-        <div 
-          onMouseDown={() => setActiveApp(id)}
-          className="flex-1 p-4 bg-white m-1 overflow-auto text-black min-h-32 "
-        >
-          {children}
-        </div>
+            <div
+              onMouseDown={() => setActiveApp(id)}
+              className="flex-1 p-4 bg-white m-1 overflow-auto text-black"
+            >
+              {children}
+            </div>
+          </div>
+        </ResizableBox>
       </div>
     </Draggable>
   );

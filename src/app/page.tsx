@@ -1,10 +1,12 @@
 'use client'
-import Test1 from "@/components/apps/test1";
-import Test2 from "@/components/apps/test2";
+import About from "@/components/apps/About";
+import Projects from "@/components/apps/Projects";
+import Links from "@/components/apps/Links";
 import Window from "@/components/window";
 import { AppId, useOSStore } from "@/store/useOSStore";
 import Image from "next/image";
 import Shortcut from "@/components/shortcut";
+import Taskbar from "@/components/Taskbar";
 
 export default function Home() {
 
@@ -13,26 +15,28 @@ export default function Home() {
   const RenderWindowContent = (Id: AppId)=>{
 
     switch(Id){
-      case 'test1':
-        return <Test1/>
-      case 'test2':
-        return <Test2/>
+      case 'About':
+        return <About/>
+      case 'Projects':
+        return <Projects/>
+      case 'Links':
+        return <Links/>
 
     }
 
   }
   return (
-      <main className="h-screen w-screen overflow-hidden flex-col flex " style={{
+      <main className="h-screen w-screen overflow-hidden flex-col flex font-tahoma " style={{
         backgroundImage: 'url("/bliss.jpg")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
       }}>
-        <div className="flex-1 relative">
-          {/* test shortcut */}
-          <Shortcut id="test1" title="test shortcut"/>
-          <Shortcut id="test2" title="hello"/>
-          <Shortcut id="test3" title="yes"/>
+        <div className="flex-11 relative">
+          {/* test shortcuts */}
+          <Shortcut id="About" title="About" icon="/computer.ico"/>
+          <Shortcut id="Projects" title="Projects" icon="/folder-2.ico"/>
+          <Shortcut id="Links" title="Links" icon="/planet.ico"/>
 
 
           {openApps.map((id, index) => (
@@ -42,6 +46,7 @@ export default function Home() {
         ))}
 
         </div>
+        <Taskbar/>
       </main>
   );
 }
