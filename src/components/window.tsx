@@ -23,7 +23,7 @@ export default function Window({ id, title, children, index }: WindowProps) {
       nodeRef={nodeRef}
       handle=".window-header"
       bounds="parent"
-      defaultPosition={{ x: 100 + (index * 25), y: window.innerHeight/-2.5 + (index * 25) }}
+      defaultPosition={{ x: 100 + (index * 25), y: window.innerHeight/-2 + (index * 25) }}
       onStart={() => setActiveApp(id)}
     >
       <div
@@ -61,8 +61,8 @@ export default function Window({ id, title, children, index }: WindowProps) {
                 {title}
               </span>
               <button
-                onMouseDown={(e) => e.stopPropagation()}
-                onClick={(e) => {
+                // onMouseDown={(e) => e.stopPropagation()}
+                onMouseDown={(e) => {
                   e.stopPropagation();
                   closeApp(id);
                 }}

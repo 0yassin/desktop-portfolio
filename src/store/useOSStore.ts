@@ -3,16 +3,24 @@ import { create } from 'zustand'
 export type AppId = 'About' | 'Projects' | 'Links';
 
 interface OSState {
+    startopen: boolean;
     openApps: AppId[];       
     activeApp: AppId | null; 
     launchApp: (id: AppId) => void;
     closeApp: (id: AppId) => void;
     setActiveApp: (id: AppId) => void;
+    togglestart: () => void;
+    closestart: () => void;
 }
 
 export const useOSStore = create<OSState>((set) => ({
     openApps: [],
     activeApp: null,
+    startopen: false,
+
+    togglestart: () => set((state) => ({startopen: !state.startopen})),
+
+    closestart: () => set((state) => ({startopen: false})),
 
     launchApp: (id) => set((state) => {
         if (state.openApps.includes(id)) return { activeApp: id };
