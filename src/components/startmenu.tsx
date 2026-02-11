@@ -25,7 +25,7 @@ export default function Startmenu(){
                     />
                     <span className="text-[26px] drop-shadow-[1px_1px_1px_rgba(0,0,0,1)]">USERNAME</span>
                 </div>
-                <div className="gap-4 flex  bg-white text-black border-r-6 border-blue-500">
+                <div className="gap-4 flex  bg-white text-gray-900 border-r-6 border-blue-500">
                   <div className="flex-1 w-fit flex-col flex gap-2 mb-4  mr-12 ">
                         {Object.entries(menudata).map(([title, items]) => (
                         items.map((item) => (
@@ -40,7 +40,7 @@ export default function Startmenu(){
                             h={80}
                             w={80}
                             />
-                            <span onMouseDown={()=>launchApp(item.ID as AppId)} className="text-[22px] w-full">
+                            <span onMouseDown={()=>launchApp(item.ID as AppId)} className="text-[22px] w-full group-hover:underline transition-all">
                                 {item.ID}
                             </span>
                         </div>
@@ -48,7 +48,7 @@ export default function Startmenu(){
                         ))}
                     
                   </div>
-                  <div className="flex-1  bg-blue-200 ">RIGHT PART</div>
+                  <div className="flex-1  bg-blue "></div>
                 </div>
                 <div className="py-2 px-2 justify-end gap-8 flex bg-linear-to-b from-blue-500 to-[#245edb]">
                     <div className="flex items-center gap-2 cursor-pointer">
