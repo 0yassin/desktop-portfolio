@@ -1,8 +1,12 @@
 {
+    "Account" : [{
+        "ID":"Account",
+        "Icon": "/computer.ico"
+    }],
     
     "About": [{
         "ID":"About",
-        "Icon": "/computer.ico"
+        "Icon": "/folder-2.ico"
     }],
     "Links": [{
         "ID":"Links",
@@ -11,11 +15,8 @@
     "Projects": [{
         "ID":"Projects",
         "Icon": "/folder-2.ico"
-    }],
-    "Account" : [{
-        "ID":"Account",
-        "Icon": "/computer.ico"
     }]
+
 
 
 
