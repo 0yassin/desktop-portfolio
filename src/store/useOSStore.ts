@@ -15,6 +15,9 @@ interface OSState {
     setActiveApp: (id: AppId) => void;
     togglestart: () => void;
     closestart: () => void;
+    isBsod: boolean;
+    triggerBsod: () => void;
+    reboot: () => void;
 }
 
 export const useOSStore = create<OSState>((set) => ({
@@ -48,5 +51,9 @@ export const useOSStore = create<OSState>((set) => ({
 
     setActiveApp: (id) => set({ activeApp: id }),
     set_pfp: (path) => set({currentpfp: path}),
-    set_username: (new_username) => set({username: new_username})
+    set_username: (new_username) => set({username: new_username}),
+    isBsod: false,
+    triggerBsod: ()=>set({isBsod:true}),
+    reboot: ()=>window.location.reload()
+
 }))
