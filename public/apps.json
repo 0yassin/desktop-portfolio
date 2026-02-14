@@ -11,6 +11,10 @@
     "Projects": [{
         "ID":"Projects",
         "Icon": "/folder-2.ico"
+    }],
+    "Account" : [{
+        "ID":"Account",
+        "Icon": "/computer.ico"
     }]
 
 

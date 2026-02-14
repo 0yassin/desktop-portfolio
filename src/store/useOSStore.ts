@@ -1,8 +1,10 @@
 import { create } from 'zustand'
 
-export type AppId = 'About' | 'Projects' | 'Links';
+export type AppId = 'About' | 'Projects' | 'Links' | 'Account';
 
 interface OSState {
+    currentpfp: string;
+    set_pfp: (path: string) => void;
     startopen: boolean;
     openApps: AppId[];       
     activeApp: AppId | null; 
@@ -17,6 +19,8 @@ export const useOSStore = create<OSState>((set) => ({
     openApps: [],
     activeApp: null,
     startopen: false,
+    currentpfp: "/chess.jpg",
+    
 
     togglestart: () => set((state) => ({startopen: !state.startopen})),
 
@@ -40,4 +44,5 @@ export const useOSStore = create<OSState>((set) => ({
     })),
 
     setActiveApp: (id) => set({ activeApp: id }),
+    set_pfp: (path) => set({currentpfp: path})
 }))

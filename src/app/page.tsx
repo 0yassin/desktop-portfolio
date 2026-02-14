@@ -9,6 +9,7 @@ import Shortcut from "@/components/shortcut";
 import Taskbar from "@/components/Taskbar";
 import Startmenu from "@/components/startmenu";
 import menudata from "../../public/apps.json"
+import Account from "@/components/apps/Account";
 
 export default function Home() {
 
@@ -25,12 +26,14 @@ export default function Home() {
         return <Projects/>
       case 'Links':
         return <Links/>
+      case 'Account':
+        return <Account/>
 
     }
 
   }
   return (
-      <main className="h-screen w-screen overflow-hidden flex-col flex font-tahoma " style={{
+      <main className="h-screen select-none w-screen overflow-hidden flex-col flex font-tahoma " style={{
         backgroundImage: 'url("/bliss.jpg")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',

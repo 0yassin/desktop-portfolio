@@ -1,0 +1,22 @@
+{
+
+
+    "pfp_list": [
+        {"name": "snowflake", "path": "/snowflake.jpg", "bg":""},
+        {"name": "duck", "path": "/duck.jpg", "bg":""},
+        {"name": "fish", "path": "/fish.jpg", "bg":""},
+        {"name": "guest", "path": "/guest.jpg", "bg":""},
+        {"name": "guitar", "path": "/guitar.jpg", "bg":""},
+        {"name": "red flower", "path": "/red flower.jpg", "bg":""},
+        {"name": "lift-off", "path": "/lift-off.jpg", "bg":""},
+        {"name": "dog", "path": "/dog.jpg", "bg":""},
+        {"name": "cat", "path": "/cat.jpg", "bg":""},
+        {"name": "car", "path": "/car.jpg", "bg":""},
+        {"name": "ball", "path": "/ball.jpg", "bg":""},
+        {"name": "beach", "path": "/beach.jpg", "bg":""},
+        {"name": "chess", "path": "/chess.jpg", "bg":""},
+        {"name": "astronaut", "path": "/astronaut.jpg", "bg":""},
+        {"name": "airplane", "path": "/airplane.jpg", "bg":""}
+        
+    ]
+}

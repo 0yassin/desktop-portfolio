@@ -4,9 +4,11 @@ import { AppId, useOSStore } from "@/store/useOSStore"
 import Image from "next/image";
 import Shortcut from "./shortcut";
 import menudata from "../../public/apps.json"
+import osdata from "../../public/osdata.json"
+
 
 export default function Startmenu(){
-    const {startopen, closestart,launchApp, openApps} = useOSStore();
+    const {startopen, closestart,launchApp, openApps, currentpfp} = useOSStore();
 
     if (!startopen) return null
 
@@ -17,11 +19,11 @@ export default function Startmenu(){
 
                 <div className=" pl-2 rounded-t-[5px] py-3 pr-12 bg-linear-to-t from-blue-500 from-30% to-80% to-[#245edb] w-full justify-start flex items-center gap-4">
                     <Image 
-                        src="/winxp.ico" 
-                        alt="idk" 
+                        src={currentpfp}
+                        alt="pfp" 
                         width={52} 
                         height={52}
-                        className=" border-2 bg-whites border-gray-400 bg-gray-500 p-1 border-whites rounded-[5px] drop-shadow-md"
+                        className=" border-2 bg-whites border-gray-200 border-whites rounded-[5px] drop-shadow-md"
                     />
                     <span className="text-[26px] drop-shadow-[1px_1px_1px_rgba(0,0,0,1)]">USERNAME</span>
                 </div>
