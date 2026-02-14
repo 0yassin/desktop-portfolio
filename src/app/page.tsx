@@ -60,7 +60,7 @@ export default function Home() {
                     ))
                 ))}
 
-                <div onMouseDown={()=>triggerBsod()} className=" items-center content-center justify-center flex flex-col group text-center cursor-pointer pointer-events-auto select-none">
+                <div onDoubleClick={()=>triggerBsod()} className=" items-center content-center justify-center flex flex-col group text-center cursor-pointer pointer-events-auto select-none">
                         {/* icon */}
                     <Image 
                         src={'/dont.ico'} 

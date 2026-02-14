@@ -7,8 +7,8 @@ export default function BSOD(){
     
     useEffect(()=>{
         const handleKeyDown = () => reboot();
-        window.addEventListener('keydown', handleKeyDown);
-        return () => window.removeEventListener('keydown', handleKeyDown);
+        window.addEventListener('keypress', handleKeyDown);
+        return () => window.removeEventListener('keypress', handleKeyDown);
     }, [reboot])
 
     return(
