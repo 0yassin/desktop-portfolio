@@ -18,6 +18,8 @@ interface OSState {
     isBsod: boolean;
     triggerBsod: () => void;
     reboot: () => void;
+    current_wallpaper: string;
+    set_current_wallpaper: (new_wallpaper: string) => void;
 }
 
 export const useOSStore = create<OSState>((set) => ({
@@ -54,6 +56,8 @@ export const useOSStore = create<OSState>((set) => ({
     set_username: (new_username) => set({username: new_username}),
     isBsod: false,
     triggerBsod: ()=>set({isBsod:true}),
-    reboot: ()=>window.location.reload()
+    reboot: ()=>window.location.reload(),
+    current_wallpaper: "/bliss.jpg",
+    set_current_wallpaper: (new_wallpaper) => set({current_wallpaper: new_wallpaper}),
 
 }))

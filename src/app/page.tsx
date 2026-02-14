@@ -14,7 +14,7 @@ import BSOD from "@/components/Bsod";
 
 export default function Home() {
 
-  const {launchApp,isBsod, openApps, triggerBsod} = useOSStore();
+  const {launchApp,isBsod, openApps, triggerBsod, current_wallpaper} = useOSStore();
 
   const RenderWindowContent = (Id: AppId)=>{
 
@@ -35,7 +35,7 @@ export default function Home() {
   }
   return (
       <main className="h-screen select-none w-screen overflow-hidden flex-col flex font-tahoma " style={{
-        backgroundImage: 'url("/bliss.jpg")',
+        backgroundImage: `url(${current_wallpaper})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
@@ -63,7 +63,7 @@ export default function Home() {
                 <div onDoubleClick={()=>triggerBsod()} className=" items-center content-center justify-center flex flex-col group text-center cursor-pointer pointer-events-auto select-none">
                         {/* icon */}
                     <Image 
-                        src={'/dont.ico'} 
+                        src={'/1464.ico'} 
                         alt={'DONOTRUN'} 
                         width={60} 
                         height={60}

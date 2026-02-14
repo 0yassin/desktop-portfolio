@@ -4,7 +4,7 @@ import Image from "next/image"
 import { useState } from "react"
 
 export default function Account(){
-    const {set_pfp, currentpfp, set_username} = useOSStore()
+    const {set_pfp, currentpfp, set_username, current_wallpaper, set_current_wallpaper} = useOSStore()
     const [new_use, set_new_user] = useState('yassin')
     return(
         <div className="flex flex-col gap-4">
@@ -19,7 +19,7 @@ export default function Account(){
                             px-4 cursor-pointer bg-[#0b61ff] text-[23px] text-white rounded-[5px] h-full
                             border-t-white/50 border-l-white/50 border-b-gray-800 border-r-gray-800 border-2
                             active:border-b-white/50 active:border-r-white/50 active:border-t-gray-800 active:border-l-gray-800
-                            active:pt-[2psx] active:pb-0
+                            active:pt-0.5 active:pb-0
                         "
                     >
                         set username
@@ -29,7 +29,8 @@ export default function Account(){
 
             <div>
                 <h1 className="text-[28px] text-gray-900 text-nowrap">Change profile picture</h1>
-                <div className="flex flex-wrap gap-6 ">
+                {/* Changed minmax(100px, 1fr) to just 100px to prevent stretching */}
+                <div className="grid grid-cols-[repeat(auto-fill,100px)] gap-6">
 
                 {osdata.pfp_list.map((pfp) => (
                     
@@ -64,7 +65,44 @@ export default function Account(){
                 ))}
                 </div>           
             </div>
+            <div>
+                <h1 className="text-[28px] text-gray-900 text-nowrap">Change Your wallpaper</h1>
+                {/* Changed minmax(100px, 1fr) to just 100px to prevent stretching */}
+                <div className="grid grid-cols-[repeat(auto-fill,100px)] gap-6">
 
+                {osdata.wallpaper_list.map((wallpaper) => (
+                    
+                    <div 
+                    key={wallpaper.path} 
+                    className="group flex flex-col gap-3 items-center text-center cursor-default" 
+                    onMouseDown={() => set_current_wallpaper(wallpaper.path)}
+                    >
+                    <Image 
+                        src={wallpaper.path} 
+                        alt={wallpaper.name} 
+                        width={64} 
+                        height={64} 
+                        className={`border-3 rounded-[5px] aspect-square object-cover ${wallpaper.path == current_wallpaper? 'border-[#0b61ff]' : "border-gray-600"}`}
+                    />
+                    
+                    <h1 className={`
+                            text-gray-800 
+                            text-center 
+                            w-fit 
+                            px-1
+                            text-[22px] 
+                            leading-[0.8] 
+                            transition-all
+                            group-hover:bg-[#0b61ff] 
+                            group-hover:text-white
+                            ${wallpaper.path == current_wallpaper? "bg-[#0b61ff] text-white": ""}
+                    `}>
+                        {wallpaper.name}
+                    </h1>
+                    </div>
+                ))}
+                </div>     
+            </div>
         </div>
     )
 }

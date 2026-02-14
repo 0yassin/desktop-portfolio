@@ -18,5 +18,18 @@
         {"name": "astronaut", "path": "/astronaut.jpg", "bg":""},
         {"name": "airplane", "path": "/airplane.jpg", "bg":""}
         
+    ],
+    "wallpaper_list": [
+        {"name": "bliss", "path":"/bliss.jpg"},
+        {"name": "Ascent", "path":"/Ascent.jpg"},
+        {"name": "Autumn", "path":"/Autumn.jpg"},
+        {"name": "Wind", "path":"/Wind.jpg"},
+        {"name": "Tulips", "path":"/Tulips.jpg"},
+        {"name": "Red moon desert", "path":"/Redmoondesert.jpg"},
+        {"name": "Radiance", "path":"/Radiance.jpg"},
+        {"name": "Moon flower", "path":"/Moonflower.jpg"},
+        {"name": "Freind", "path":"/Friend.jpg"},
+        {"name": "Follow", "path":"/Follow.jpg"},
+        {"name": "Azul", "path":"/Azul.jpg"}
     ]
 }
