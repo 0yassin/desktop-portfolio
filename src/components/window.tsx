@@ -15,8 +15,12 @@ export default function Window({ id, title, children, index }: WindowProps) {
   const { closeApp, setActiveApp, activeApp } = useOSStore();
   const nodeRef = useRef(null);
   const isActive = activeApp === id;
+  const isAccount = id === 'Account' as AppId;
 
-  const [size, setSize] = useState({ width: 320, height: 240 });
+  const [size, setSize] = useState({ 
+    width: isAccount ? 450 : 320, 
+    height: isAccount ? 350 : 240 
+  });
 
   return (
     <Draggable

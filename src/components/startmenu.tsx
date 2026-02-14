@@ -8,7 +8,7 @@ import osdata from "../../public/osdata.json"
 
 
 export default function Startmenu(){
-    const {startopen, closestart,launchApp, openApps, currentpfp} = useOSStore();
+    const {startopen, closestart,launchApp, currentpfp, username} = useOSStore();
 
     if (!startopen) return null
 
@@ -25,7 +25,7 @@ export default function Startmenu(){
                         height={52}
                         className=" border-2 bg-whites border-gray-200 border-whites rounded-[5px] drop-shadow-md"
                     />
-                    <span className="text-[26px] drop-shadow-[1px_1px_1px_rgba(0,0,0,1)]">USERNAME</span>
+                    <span className="text-[26px] drop-shadow-[1px_1px_1px_rgba(0,0,0,1)]">{username}</span>
                 </div>
                 <div className="gap-4 flex  bg-white text-gray-900 border-r-6 border-blue-500">
                   <div className="flex-1 w-fit flex-col flex gap-2 mb-4  mr-12 ">
