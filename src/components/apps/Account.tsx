@@ -6,6 +6,7 @@ import { useState } from "react"
 export default function Account(){
     const {set_pfp, currentpfp, set_username, current_wallpaper, set_current_wallpaper} = useOSStore()
     const [new_use, set_new_user] = useState('yassin')
+    const audio = new Audio("/setting_change.wav")
     return(
         <div className="flex flex-col gap-4">
             <div>
@@ -14,12 +15,12 @@ export default function Account(){
 
                     <input type="text" value={new_use} onChange={(e)=> set_new_user(e.target.value)} className=" outline-0 border-2 border-gray-400 bg-gray-300 rounded-[5px] text-[22px] text-gray-900 px-2"></input>
                     <button 
-                        onClick={()=>set_username(new_use)} 
+                        onClick={()=>{audio.play();set_username(new_use)}} 
                         className="
                             px-4 cursor-pointer bg-[#0b61ff] text-[23px] text-white rounded-[5px] h-full
                             border-t-white/50 border-l-white/50 border-b-gray-800 border-r-gray-800 border-2
                             active:border-b-white/50 active:border-r-white/50 active:border-t-gray-800 active:border-l-gray-800
-                            active:pt-0.5 active:pb-0
+                            
                         "
                     >
                         set username
@@ -37,7 +38,7 @@ export default function Account(){
                     <div 
                     key={pfp.path} 
                     className="group flex flex-col gap-3 items-center text-center cursor-default" 
-                    onMouseDown={() => set_pfp(pfp.path)}
+                    onMouseDown={() => { audio.play() ;set_pfp(pfp.path)}}
                     >
                     <Image 
                         src={pfp.path} 
@@ -75,7 +76,7 @@ export default function Account(){
                     <div 
                     key={wallpaper.path} 
                     className="group flex flex-col gap-3 items-center text-center cursor-default" 
-                    onMouseDown={() => set_current_wallpaper(wallpaper.path)}
+                    onMouseDown={() => { audio.play() ;set_current_wallpaper(wallpaper.path)}}
                     >
                     <Image 
                         src={wallpaper.path} 

@@ -6,12 +6,13 @@ import Shortcut from "./shortcut"
 
 
 export default function Taskbar(){
+    const audio = new Audio("/menu_command.wav")
 
     const {togglestart, startopen, openApps} = useOSStore()
 
     return(
         <div className=" absolute bottom-0 z-20 w-full select-none flex flex-row bg-linear-to-t from-[#245edb] from-80% to-blue-300 border-t-[1.5px]  flex-1 gap-8">
-            <div onClick={(e)=>{e.stopPropagation();togglestart()}} className="bg-linear-to-t pl-4  gap-4 cursor-pointer flex items-center min-w-fit w-fit pr-12  from-80% h-full from-green-600 to-green-300 rounded-r-[20px] ">
+            <div onClick={(e)=>{audio.play();e.stopPropagation();togglestart()}} className="bg-linear-to-t pl-4  gap-4 cursor-pointer flex items-center min-w-fit w-fit pr-12  from-80% h-full from-green-600 to-green-300 rounded-r-[20px] ">
 
                 <Image 
                     src={"/winxp.ico"} 

@@ -16,9 +16,7 @@ interface WindowProps {
 
 
 export default function Shortcut({id, title, show_title=true, w=60, h=60, doubleclick=true}: WindowProps){
-    const {launchApp} = useOSStore();
-    const allItems = Object.values(menudata).flat();
-
+    const {launchApp} = useOSStore();    
     const getIconById = (id: string) => {
       const allItems = Object.values(menudata).flat();
       const foundItem = allItems.find(item => item.ID === id);

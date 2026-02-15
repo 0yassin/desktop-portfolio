@@ -16,6 +16,7 @@ export default function Window({ id, title, children, index }: WindowProps) {
   const nodeRef = useRef(null);
   const isActive = activeApp === id;
   const isAccount = id === 'Account' as AppId;
+  const audio = new Audio("/ding.wav")
 
   const [size, setSize] = useState({ 
     width: isAccount ? 450 : 320, 
@@ -69,6 +70,7 @@ export default function Window({ id, title, children, index }: WindowProps) {
                 onMouseDown={(e) => {
                   e.stopPropagation();
                   closeApp(id);
+                  audio.play()
                 }}
                 className="bg-[#e21010] border border-white px-2 h-5 text-white text-xs font-bold hover:brightness-110 active:shadow-inner"
               >
