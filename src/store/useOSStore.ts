@@ -1,18 +1,24 @@
 import { create } from 'zustand'
 
 export type AppId = 'About' | 'Projects' | 'Links' | 'Account';
-const audio = new Audio("/error.mp3");
-const audio1 = new Audio("/menu_command.wav")
 
+const playSound = (path: string) => {
+    if (typeof window !== 'undefined') {
+        const audio = new Audio(path);
+        audio.play().catch(() => {
+            console.warn("Audio playback blocked: Wait for user interaction.");
+        });
+    }
+};
 
 interface OSState {
     currentpfp: string;
     set_pfp: (path: string) => void;
     username: string;
-    set_username: (newusername : string) => void;
+    set_username: (newusername: string) => void;
     startopen: boolean;
-    openApps: AppId[];       
-    activeApp: AppId | null; 
+    openApps: AppId[];
+    activeApp: AppId | null;
     launchApp: (id: AppId) => void;
     closeApp: (id: AppId) => void;
     setActiveApp: (id: AppId) => void;
@@ -26,29 +32,31 @@ interface OSState {
 }
 
 export const useOSStore = create<OSState>((set) => ({
+    // Initial State
     openApps: [],
     activeApp: null,
     startopen: false,
     currentpfp: "/chess.jpg",
     username: "Yassin",
-    
-    
+    isBsod: false,
+    current_wallpaper: "/bliss.jpg",
 
-    togglestart: () => set((state) => ({startopen: !state.startopen})),
+    togglestart: () => set((state) => ({ startopen: !state.startopen })),
 
-    closestart: () => set((state) => ({startopen: false})),
+    closestart: () => set({ startopen: false }),
 
     launchApp: (id) => set((state) => {
-        audio1.play()
-        if (state.openApps.includes(id)) return { activeApp: id };
-        const offset = state.openApps.length * 20;
-        return{
+        playSound("/menu_command.wav");
 
-            openApps: state.openApps.includes(id) ? state.openApps : [...state.openApps, id],
-            activeApp: id
+        if (state.openApps.includes(id)) {
+            return { activeApp: id, startopen: false };
         }
-        
-        
+
+        return {
+            openApps: [...state.openApps, id],
+            activeApp: id,
+            startopen: false 
+        };
     }),
 
     closeApp: (id) => set((state) => ({
@@ -57,19 +65,21 @@ export const useOSStore = create<OSState>((set) => ({
     })),
 
     setActiveApp: (id) => set({ activeApp: id }),
-    set_pfp: (path) => set({currentpfp: path}),
-    set_username: (new_username) => set({username: new_username}),
-    isBsod: false,
-    triggerBsod: ()=> {
-        
-        // const audio = new Audio("/error.mp3");
-        audio.play().catch(err => console.error("audio blocked by browser"))
-        
-        set({isBsod:true})
-    
-    },
-    reboot: ()=>window.location.reload(),
-    current_wallpaper: "/bliss.jpg",
-    set_current_wallpaper: (new_wallpaper) => set({current_wallpaper: new_wallpaper}),
 
-}))
+    set_pfp: (path) => set({ currentpfp: path }),
+
+    set_username: (new_username) => set({ username: new_username }),
+
+    triggerBsod: () => {
+        playSound("/error.mp3");
+        set({ isBsod: true });
+    },
+
+    reboot: () => {
+        if (typeof window !== 'undefined') {
+            window.location.reload();
+        }
+    },
+
+    set_current_wallpaper: (new_wallpaper) => set({ current_wallpaper: new_wallpaper }),
+}));

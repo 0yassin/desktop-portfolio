@@ -1,5 +1,5 @@
 'use client';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import Draggable from 'react-draggable';
 import { ResizableBox } from 'react-resizable';
 import { useOSStore, AppId } from '@/store/useOSStore';
@@ -16,7 +16,22 @@ export default function Window({ id, title, children, index }: WindowProps) {
   const nodeRef = useRef(null);
   const isActive = activeApp === id;
   const isAccount = id === 'Account' as AppId;
-  const audio = new Audio("/ding.wav")
+
+  const [initialPos, setInitialPos] = useState({ x: 100 + (index * 25), y: 100 + (index * 25) });
+
+  useEffect(() => {
+    setInitialPos({
+      x: 100 + (index * 25),
+      y: (window.innerHeight / 4) + (index * 25) 
+    });
+  }, [index]);
+
+  const playCloseSound = () => {
+    if (typeof window !== 'undefined') {
+      const audio = new Audio("/ding.wav");
+      audio.play().catch(() => {});
+    }
+  };
 
   const [size, setSize] = useState({ 
     width: isAccount ? 450 : 320, 
@@ -28,7 +43,7 @@ export default function Window({ id, title, children, index }: WindowProps) {
       nodeRef={nodeRef}
       handle=".window-header"
       bounds="parent"
-      defaultPosition={{ x: 100 + (index * 25), y: window.innerHeight/-2 + (index * 25) }}
+      defaultPosition={initialPos}
       onStart={() => setActiveApp(id)}
     >
       <div
@@ -66,11 +81,10 @@ export default function Window({ id, title, children, index }: WindowProps) {
                 {title}
               </span>
               <button
-                // onMouseDown={(e) => e.stopPropagation()}
                 onMouseDown={(e) => {
                   e.stopPropagation();
+                  playCloseSound();
                   closeApp(id);
-                  audio.play()
                 }}
                 className="bg-[#e21010] border border-white px-2 h-5 text-white text-xs font-bold hover:brightness-110 active:shadow-inner"
               >
