@@ -17,7 +17,7 @@ export default function Window({ id, title, children, index }: WindowProps) {
   const isActive = activeApp === id;
   const isAccount = id === 'Account' as AppId;
 
-  const [initialPos, setInitialPos] = useState({ x: 100 + (index * 25), y: 100 + (index * 25) });
+  const [initialPos, setInitialPos] = useState({ x: 100 + (index * 25), y: window.innerHeight/-2 + (index * 25) });
 
   useEffect(() => {
     setInitialPos({
